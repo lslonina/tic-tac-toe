@@ -5,7 +5,7 @@ package org.slonina.tdd.tictactoe;
  */
 public class TicTacToe {
     private Object[][] board = new Object[3][3];
-    private String lastPlayer = "X";
+    private String lastPlayer = "O";
 
     public void play(int x, int y) {
         isWithinBounds(x, y);
