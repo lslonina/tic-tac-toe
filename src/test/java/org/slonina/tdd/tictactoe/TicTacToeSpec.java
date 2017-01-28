@@ -9,6 +9,7 @@ import org.junit.matchers.JUnitMatchers;
 import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Lukasz Slonina <lukasz.slonina@gmail.com>
@@ -65,7 +66,7 @@ public class TicTacToeSpec {
     {
         String nextPlayer = ticTacToe.nextPlayer();
 
-        Assert.assertThat(nextPlayer, is(equalTo("X"))) ;
+        assertThat(nextPlayer, is(equalTo("X"))) ;
     }
 
     @Test
@@ -75,7 +76,65 @@ public class TicTacToeSpec {
 
         String nextPlayer = ticTacToe.nextPlayer();
 
-        Assert.assertThat(nextPlayer, is(equalTo("O"))) ;
+        assertThat(nextPlayer, is(equalTo("O"))) ;
+    }
+
+    @Test
+    public void whenPlayThenNoWinner()
+    {
+        String result = ticTacToe.play(1,1);
+
+        assertThat(result, is(equalTo(null)));
+
+    }
+
+    @Test
+    public void whenPlayAndWholeHorizontalLineThenWinner()
+    {
+        ticTacToe.play(1,1);
+        ticTacToe.play(1, 2);
+        ticTacToe.play(2, 1);
+        ticTacToe.play(2,2);
+        String winner = ticTacToe.play(3, 1);
+
+        assertThat(winner, is(equalTo("X")));
+    }
+
+    @Test
+    public void whenPlayAndWholeVerticalLineThenWinner()
+    {
+        ticTacToe.play(1,1);
+        ticTacToe.play(2, 1);
+        ticTacToe.play(3, 1);
+        ticTacToe.play(2,2);
+        ticTacToe.play(3,2);
+        String winner = ticTacToe.play(2,3);
+
+        assertThat(winner, is(equalTo("O")));
+    }
+
+    @Test
+    public void whenPlayAndWholeDiagonalLineThenWinner1()
+    {
+        ticTacToe.play(1,1);
+        ticTacToe.play(2, 1);
+        ticTacToe.play(2, 2);
+        ticTacToe.play(3,1);
+        String winner = ticTacToe.play(3, 3);
+
+        assertThat(winner, is(equalTo("X")));
+    }
+
+    @Test
+    public void whenPlayAndWholeDiagonalLineThenWinner2()
+    {
+        ticTacToe.play(3,1);
+        ticTacToe.play(1, 1);
+        ticTacToe.play(2, 2);
+        ticTacToe.play(3,2);
+        String winner = ticTacToe.play(1, 3);
+
+        assertThat(winner, is(equalTo("X")));
     }
 
 }
