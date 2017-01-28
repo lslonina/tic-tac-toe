@@ -137,4 +137,20 @@ public class TicTacToeSpec {
         assertThat(winner, is(equalTo("X")));
     }
 
+    @Test
+    public void whenPlayAndWholeBoardOccupiedThenDraw()
+    {
+        ticTacToe.play(1,1);
+        ticTacToe.play(2, 1);
+        ticTacToe.play(3, 1);
+        ticTacToe.play(2,2);
+        ticTacToe.play(1,2);
+        ticTacToe.play(1,3);
+        ticTacToe.play(3,2);
+        ticTacToe.play(3, 3);
+        String winner = ticTacToe.play(2,3);
+
+        assertThat(winner, is(equalTo("D")));
+    }
+
 }

@@ -19,7 +19,21 @@ public class TicTacToe {
             return lastPlayer;
         }
 
+        if (isDraw()) {
+            return "D";
+        }
+
         return null;
+    }
+
+    private boolean isDraw() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == null)
+                    return false;
+            }
+        }
+        return true;
     }
 
     private boolean isWin(int x, int y) {
@@ -28,8 +42,8 @@ public class TicTacToe {
     }
 
     private boolean isWholeDiagonalLine2() {
-        for (int i = 2; i >=0; i--) {
-            String box = board[i][2-i];
+        for (int i = 2; i >= 0; i--) {
+            String box = board[i][2 - i];
             if (box == null || !box.equals(lastPlayer)) {
                 return false;
             }
