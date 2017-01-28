@@ -5,6 +5,7 @@ package org.slonina.tdd.tictactoe;
  */
 public class TicTacToe {
     private Object[][] board = new Object[3][3];
+    private String lastPlayer = "X";
 
     public void play(int x, int y) {
         isWithinBounds(x, y);
@@ -12,6 +13,11 @@ public class TicTacToe {
 
         setBox(x, y);
 
+        lastPlayer = nextPlayer();
+    }
+
+    public String nextPlayer() {
+        return lastPlayer.equals("X") ? "O" : "X";
     }
 
     private void setBox(int x, int y) {

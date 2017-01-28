@@ -1,9 +1,14 @@
 package org.slonina.tdd.tictactoe;
 
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.matchers.JUnitMatchers;
 import org.junit.rules.ExpectedException;
+
+import static org.hamcrest.CoreMatchers.*;
 
 /**
  * @author Lukasz Slonina <lukasz.slonina@gmail.com>
@@ -53,6 +58,24 @@ public class TicTacToeSpec {
         ticTacToe.play(1, 1);
         exception.expect(RuntimeException.class);
         ticTacToe.play(1, 1);
+    }
+
+    @Test
+    public void whenNewGameThenPlayerX()
+    {
+        String nextPlayer = ticTacToe.nextPlayer();
+
+        Assert.assertThat(nextPlayer, is(equalTo("X"))) ;
+    }
+
+    @Test
+    public void whenLastPlayerWasXThenNextPlayerO()
+    {
+        ticTacToe.play(1,1);
+
+        String nextPlayer = ticTacToe.nextPlayer();
+
+        Assert.assertThat(nextPlayer, is(equalTo("O"))) ;
     }
 
 }
